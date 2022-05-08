@@ -1,0 +1,12 @@
+.start-jarnbin-img {
+  transform: scale(50%, 50%);
+}
+
+.tran-jarnbin-1 {
+  transform: translateY(-220px);
+  transition: 1.5s;
+}
+.tran-jarnbin-2 {
+  transform: translateY(-60px);
+  transition: 1s;
+}
