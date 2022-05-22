@@ -1,62 +1,87 @@
-var pageNumber = 0;
-var isAnimating = true;
-
-const outer_jarnbin = document.querySelector('.anim-jarnbin');
-const jarnbin = document.querySelector('.start-jarnbin-img');
-const fade_in = document.querySelector('.fade-in');
-
-const anim = { // animationออก
-  0: async () => {
-    console.log('start anim 0');
-    jarnbin.classList.add('tran-jarnbin-1');
-    await new Promise((resolve) => { setTimeout(() => {
-      outer_jarnbin.style.zIndex = 0;
-      jarnbin.classList.add('tran-jarnbin-2');
-      resolve();
-    }, 2500)});
-    await new Promise((resolve) => { setTimeout(() => {
-      console.log('stop anim 0');
-      resolve();
-    }, 500)});
-    isAnimating = false;
-  },
-  1: async () => {
-    console.log('start anim 1');
-    jarnbin.classList.add('tran-jarnbin-3');
-    fade_in.classList.add('fade-in-slow'); // add fade
-    await new Promise((resolve) => { setTimeout(() => {
-      fade_in.classList.remove('fade-in-slow'); // remove fade
-      resolve();
-    }, 3000)});
-    console.log('a')
-    Promise.resolve();
-  },
-  2: async () => {
-    
-  },
-  3: async () => {
-    
-  },
-  4: async () => {
-    
-  },
-  5: async () => {
-    
-  },
-};
-
-document.body.addEventListener('click', async () => {
-  if (!isAnimating) {
-    isAnimating = true;
-    await anim[++pageNumber]();
-    console.log(val)
-    console.log(isAnimating);
-    isAnimating = false;
-  }
+// button
+const detail = document.querySelector('.detailContainer');
+const button = document.querySelectorAll('button');
+let clickCount = 0;
+console.log(button);
+button.forEach(element => {  
+  element.addEventListener("click", function(){
+    clickCount++;
+    if (clickCount % 2 === 1){
+      detail.classList.add('detailContainerOn');
+    } else {
+      detail.classList.remove('detailContainerOn');
+    }
+  });
 });
+/////////////////// animation on scroll
+var scroll = window.requestAnimationFrame
+var elementsToShow = document.querySelectorAll('.show-on-scroll'); 
 
-// run first anim
-anim[0]();
-setInterval(() => {
-  console.log(isAnimating)
-},100)
+function loop() {
+
+    Array.prototype.forEach.call(elementsToShow, function(element){
+      if (isElementInViewport(element)) {
+        element.classList.add('is-visible');
+      } else {
+        element.classList.remove('is-visible');
+      }
+    });
+
+    scroll(loop);
+}
+
+// Call the loop for the first time
+loop();
+
+function isElementInViewport(el) {
+    // special bonus for those using jQuery
+    if (typeof jQuery === "function" && el instanceof jQuery) {
+      el = el[0];
+    }
+    var rect = el.getBoundingClientRect();
+    return (
+      (rect.top <= 850)
+    );
+    // return (
+    //     (rect.top <= 0
+    //       && rect.bottom >= 0)
+    //     ||
+    //     (rect.bottom >= (window.innerHeight || document.documentElement.clientHeight) &&
+    //       rect.top <= (window.innerHeight || document.documentElement.clientHeight))
+    //     ||
+    //     (rect.top >= 0 &&
+    //       rect.bottom <= (window.innerHeight || document.documentElement.clientHeight))
+    //   );
+}
+
+////////////////////// parallax
+
+// Get all the elements to be parallaxed
+const parallaxElements = document.querySelectorAll('.parallax')
+ 
+// The parallax function
+const parallax = elements => {
+	if ('undefined' !== elements && elements.length > 0) {
+		elements.forEach( element => {
+			let y = window.innerHeight - element.getBoundingClientRect().top
+			if (y > 0) {
+				element.style.transform = 'translate3d(0, -' + (0.2 * y) + 'px, 0)'
+			}
+		})
+	}
+}
+ 
+//If element is in viewport, set its position
+parallax(parallaxElements)
+
+//Call the function on scroll
+window.onscroll = () => {
+	parallax(parallaxElements)
+}
+
+const payoffbutton = document.querySelector('.payOffButton');
+const payOffInvisibleText = document.querySelector('.payOffInvisibleText');
+payoffbutton.onclick = function(){
+  payOffInvisibleText.classList.add('payOffVisibleText')
+  payoffbutton.classList.add('payOffVisibleButton')
+}

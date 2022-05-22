@@ -1,0 +1,94 @@
+*{
+  box-sizing:border-box;
+  color:white;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  
+  animation:bodyfadein 2s; 
+  
+  overflow-x:hidden;
+  scroll-behavior: smooth;
+
+  background: linear-gradient(180deg, #150330 17.34%, rgba(6, 0, 108, 0.831461) 44.42%, rgba(30, 14, 94, 0.75) 69.42%, #19007D 88.17%, #140032 104.84%), url(./images/stars.png);
+  background-size:contain;
+border: 1px solid #000000;
+  background-blend-mode: lighten;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+p{
+  margin: 0;
+  padding: 0;
+}
+button{
+  z-index:100;
+}
+a{
+  text-decoration: none;
+}
+@keyframes bodyfadein{
+  from{
+    opacity:0;
+  }
+  to{
+    opacity:1;
+  }
+}
+.englishText{
+  font-family: 'Audiowide', sans-serif;
+}
+.thaiText{
+  font-family: 'Athiti', sans-serif;
+}
+.centerText{
+  text-align:center;
+}
+.largeText{
+  font-size:5vw;
+}
+.mediumText{
+  font-size:4vw;
+}
+.smallText{
+  font-size:3vw;
+}
+.miniText{
+  font-size:2vw;
+}
+.exception{
+  margin-top:3vh;
+}
+.inline-photo-left{
+  opacity: 0;
+  transform: translateX(-60px);
+  transition:opacity 1.5s ,transform 1.5s;
+}
+.inline-photo-right{
+  opacity: 0;
+  transform: translateX(60px);
+  transition:opacity 1.5s ,transform 1.5s;
+}
+.inline-photo-top{
+  opacity: 0;
+  transform: translateY(60px);
+  transition:opacity 1.5s ,transform 1.5s;
+}
+.inline-photo-bottom{
+  opacity: 0;
+  transform: translateY(-60px);
+  transition:opacity 1.5s ,transform 1.5s;
+}.inline-photo-opacity{
+  opacity: 0;
+  transition:opacity 1.5s;
+}
+.inline-photo-left.is-visible, .inline-photo-right.is-visible, .inline-photo-top.is-visible, .inline-photo-bottom.is-visible {
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+}
+.inline-photo-opacity.is-visible{
+  opacity: 1;
+}
