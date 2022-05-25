@@ -79,9 +79,35 @@ window.onscroll = () => {
 	parallax(parallaxElements)
 }
 
-const payoffbutton = document.querySelector('.payOffButton');
-const payOffInvisibleText = document.querySelector('.payOffInvisibleText');
-payoffbutton.onclick = function(){
-  payOffInvisibleText.classList.add('payOffVisibleText')
-  payoffbutton.classList.add('payOffVisibleButton')
+// const payoffbutton = document.querySelector('.payOffButton');
+// const payOffInvisibleText = document.querySelector('.payOffInvisibleText');
+// payoffbutton.onclick = function(){
+//   payOffInvisibleText.classList.add('payOffVisibleText')
+//   payoffbutton.classList.add('payOffVisibleButton')
+// }
+
+const payOffCover = document.querySelector('.payOffLinkCover');
+const audioButton = document.querySelector('.audioButton');
+let myAudio = document.getElementById('audio');
+// myAudio.autoplay = true;
+// myAudio.volume = 0.5;
+function payOffClicked(){
+  payOffCover.classList.add('payOffLinkCoverClicked')
 }
+function sound(){
+        if (myAudio.paused) {
+            myAudio.play();
+          audioButton.classList.add('audioButton')
+        }else{
+            myAudio.pause();
+            myAudio.currentTime = 0
+            audioButton.classList.add('audioMuted')
+        }
+    }
+const posi = [document.getElementById("page1").getBoundingClientRect().top, document.getElementById("song").getBoundingClientRect().top, document.getElementsByClassName("payOff").getBoundingClientRect().top];
+
+document.getElementsByClassName('burger').childNodes.forEach((el, i) => {
+  el.addEventListener("click", () => {
+    window.scrollBy(0, posi[i]);
+  });
+})
